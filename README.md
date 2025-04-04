@@ -94,7 +94,7 @@ Trying to solve a major problem with other ICS/SCADA security distributions: the
 ### Hardware Interfaces
 <div align="left">
   <img src="https://raw.githubusercontent.com/chipcode-nl/picoprobe-mac/master/images/Raspberry_Debugprobe_512.png" alt="OpenOCD" height="50"/>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Sigrok_logo.svg" alt="Sigrok" height="50"/>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/PROFIBUS_rgb_2010.png" alt="PROFIBUS" height="50"/>
 </div>
 
 | Tool | Description |
@@ -235,10 +235,10 @@ We particularly need testers with:
 GridNix features a growing collection of custom assets including icons, wallpapers, and themes:
 
 <div align="center">
-  <img src="assets/icons/GridNix-icon.svg" alt="GridNix Icon" height="100"/>
+  <img src="assets/icons/gridnix-icon.svg" alt="GridNix Icon" height="100"/>
   <img src="assets/icons/tools/network-icon.svg" alt="Network Tools Icon" height="100"/>
   <img src="assets/icons/tools/firmware-icon.svg" alt="Firmware Tools Icon" height="100"/>
-  <img src="assets/icons/tools/industrial-icon.svg" alt="Industrial Tools Icon" height="100"/>
+  <img src="assets/icons/tools/utilities-icon.svg" alt="Utilities Tools Icon" height="100"/>
 </div>
 
 <div align="center">
