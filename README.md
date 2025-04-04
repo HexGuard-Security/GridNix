@@ -58,8 +58,8 @@ Trying to solve a major problem with other ICS/SCADA security distributions: the
 
 ### Exploitation & Assessment
 <div align="left">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Metasploit_logo_and_wordmark.png" alt="Metasploit" height="50"/>
   <img src="https://raw.githubusercontent.com/bettercap/media/master/logo.png" alt="Bettercap" height="50"/>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Metasploit_logo_and_wordmark.png" alt="Metasploit" height="50"/>
 </div>
 
 | Tool | Description |
@@ -76,6 +76,8 @@ Trying to solve a major problem with other ICS/SCADA security distributions: the
 ### Simulation & Emulation
 <div align="left">
   <img src="https://gitlab.com/uploads/-/system/project/avatar/11167699/logo.png" alt="QEMU" height="50"/>
+  <img src="https://user-images.githubusercontent.com/82009729/128575518-fcef7deb-9be0-4ef9-8946-5c189a6ac411.png" alt="SCADABR" height="50"/>
+  <img src="https://autonomylogic.com/wp-content/uploads/2023/09/autonomy-opensource-white-e1694112030907-1536x468.png" alt="OpenPLC" height="50"/>
 </div>
 
 | Tool | Description |
