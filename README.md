@@ -11,12 +11,12 @@ A reproducible NixOS-based operating system for industrial control systems (ICS/
 
 <div align="left">
   <img src="https://nixos.org/logo/nixos-logo-only-hires.png" alt="NixOS Logo" height="100"/>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/PROFINET_rgb_2020.png" alt="PROFINET" height="50"/>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/PROFIBUS_rgb_2010.png" alt="PROFIBUS" height="50"/>
-  <img src="https://procentec.com/media/3070/industrial-ethernet-logo_312x130px.png" alt="Industrial Ethernet" height="50"/>
-  <img src="https://procentec.com/media/4063/ethercat-logo-procentec-product-page.png" alt="EtherCAT" height="50"/>
-  <img src="https://procentec.com/media/4062/ethernetip-logo-procentec-product-page.png" alt="Ethernet/IP" height="50"/>
-  <img src="https://procentec.com/media/3071/modbus-logo_312x130px.png" alt="Modbus" height="50"/>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/PROFINET_rgb_2020.png" alt="PROFINET" height="100"/>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/PROFIBUS_rgb_2010.png" alt="PROFIBUS" height="100"/>
+  <img src="https://procentec.com/media/3070/industrial-ethernet-logo_312x130px.png" alt="Industrial Ethernet" height="100"/>
+  <img src="https://procentec.com/media/4063/ethercat-logo-procentec-product-page.png" alt="EtherCAT" height="100"/>
+  <img src="https://procentec.com/media/4062/ethernetip-logo-procentec-product-page.png" alt="Ethernet/IP" height="100"/>
+  <img src="https://procentec.com/media/3071/modbus-logo_312x130px.png" alt="Modbus" height="100"/>
 </div>
 
 
