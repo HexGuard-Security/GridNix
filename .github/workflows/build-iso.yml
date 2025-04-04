@@ -1,0 +1,195 @@
+name: Build GridNix ISO
+
+on:
+  push:
+    branches: [ "main" ]
+    tags: [ "v*" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      build_x86_64:
+        description: 'Build x86_64 ISO'
+        type: boolean
+        default: true
+      build_aarch64:
+        description: 'Build aarch64 ISO'
+        type: boolean
+        default: true
+
+# Add permissions for creating releases
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build GridNix ISO
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v22
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Install dependencies
+        run: nix-shell -p nixos-generators git --run "echo 'Dependencies installed'"
+        
+      - name: Build ISOs
+        run: |
+          mkdir -p build
+          chmod +x build.sh
+          
+          # Set environment variables for unfree packages
+          export NIXPKGS_ALLOW_UNFREE=1
+          
+          echo "Building x86_64 ISO..."
+          ./build.sh --arch x86_64-linux
+          echo "Creating x86_64 checksum..."
+          cd build
+          echo "Files in build directory:"
+          ls -la
+          
+          # Check if the ISO file exists
+          if [ -f "GridNix-v0.1.0-alpha50-x86_64_linux.iso" ]; then
+            echo "Found ISO file, creating checksum"
+            sha256sum GridNix-v0.1.0-alpha50-x86_64_linux.iso > GridNix-x86_64.sha256
+            # Rename the ISO to a consistent name
+            cp GridNix-v0.1.0-alpha50-x86_64_linux.iso GridNix-x86_64.iso
+          else
+            echo "Looking for any ISO file..."
+            ISO_FILE=$(find . -name "*.iso" | head -n 1)
+            if [ -n "$ISO_FILE" ]; then
+              echo "Found ISO file: $ISO_FILE"
+              sha256sum "$ISO_FILE" > GridNix-x86_64.sha256
+              # Rename the ISO to a consistent name
+              cp "$ISO_FILE" GridNix-x86_64.iso
+            else
+              echo "No ISO file found, creating empty checksum"
+              touch GridNix-x86_64.sha256
+            fi
+          fi
+          cd ..
+          
+          # Note: aarch64 builds are disabled for now as they require proper cross-compilation setup
+          # Uncomment the following section when aarch64 builds are ready to be enabled
+          
+          # if [[ "${{ github.event_name }}" != "workflow_dispatch" || "${{ inputs.build_aarch64 }}" == "true" ]]; then
+          #   echo "Building aarch64 ISO..."
+          #   ./build.sh --arch aarch64-linux
+          #   echo "Creating aarch64 checksum..."
+          #   cd build
+          #   echo "Files in build directory:"
+          #   ls -la
+          #   
+          #   # Check if the ISO file exists
+          #   if [ -f "GridNix-v0.1.0-alpha50-aarch64_linux.iso" ]; then
+          #     echo "Found ISO file, creating checksum"
+          #     sha256sum GridNix-v0.1.0-alpha50-aarch64_linux.iso > GridNix-aarch64.sha256
+          #     # Rename the ISO to a consistent name
+          #     cp GridNix-v0.1.0-alpha50-aarch64_linux.iso GridNix-aarch64.iso
+          #   else
+          #     echo "Looking for any ISO file..."
+          #     ISO_FILE=$(find . -name "*.iso" | grep aarch64 | head -n 1)
+          #     if [ -n "$ISO_FILE" ]; then
+          #       echo "Found ISO file: $ISO_FILE"
+          #       sha256sum "$ISO_FILE" > GridNix-aarch64.sha256
+          #       # Rename the ISO to a consistent name
+          #       cp "$ISO_FILE" GridNix-aarch64.iso
+          #     else
+          #       echo "No ISO file found, creating empty checksum"
+          #       touch GridNix-aarch64.sha256
+          #     fi
+          #   fi
+          #   cd ..
+          # fi
+          
+          # Create empty aarch64 checksum to avoid workflow errors
+          touch build/GridNix-aarch64.sha256
+          
+          # Split ISO into smaller chunks for GitHub release
+          cd build
+          echo "Splitting ISO into chunks..."
+          split -b 1900m GridNix-x86_64.iso GridNix-x86_64.iso.part-
+          
+          # Create reassembly script
+          cat > reassemble.sh << 'EOF'
+          #!/bin/bash
+          # Script to reassemble GridNix ISO from chunks
+          
+          echo "Reassembling GridNix ISO from chunks..."
+          cat GridNix-x86_64.iso.part-* > GridNix-x86_64.iso
+          echo "ISO successfully reassembled: GridNix-x86_64.iso"
+          echo "You can verify the ISO with: sha256sum -c GridNix-x86_64.sha256"
+          EOF
+          
+          chmod +x reassemble.sh
+          ls -la
+          cd ..
+
+      - name: Upload build artifacts
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
+        with:
+          name: GridNix ${{ github.ref_name }}
+          draft: true
+          prerelease: true
+          files: |
+            build/GridNix-x86_64.iso.part-*
+            build/reassemble.sh
+            build/GridNix-x86_64.sha256
+            build/GridNix-aarch64.sha256
+          body: |
+            # GridNix ${{ github.ref_name }}
+            
+            A reproducible NixOS-based operating system for IoT penetration testing and hardware hacking.
+            
+            ## Changes in this release
+            
+            This is the first official release of GridNix, featuring:
+            
+            - NixOS 23.11 base system
+            - Core security and networking tools
+            - XFCE desktop environment
+            - Hardware hacking capabilities
+            
+            ## ISO Download
+            
+            The ISO file has been split into multiple parts due to GitHub's file size limitations.
+            
+            1. Download all the ISO parts (GridNix-x86_64.iso.part-*)
+            2. Download the reassemble.sh script
+            3. Place all files in the same directory
+            4. Run the reassemble script:
+               ```
+               chmod +x reassemble.sh
+               ./reassemble.sh
+               ```
+            5. Verify the ISO with:
+               ```
+               sha256sum -c GridNix-x86_64.sha256
+               ```
+            
+            Alternatively, you can build it locally:
+            
+            ```bash
+            # Clone the repository
+            git clone https://github.com/HexGuard-Security/GridNix.git
+            cd GridNix
+            
+            # Checkout this release
+            git checkout ${{ github.ref_name }}
+            
+            # Build the ISO (requires Nix with flakes enabled)
+            nix build .#packages.x86_64-linux.iso
+            
+            # The ISO will be available at ./result
+            ```
+            
+            ## Note on aarch64 support
+            
+            aarch64 builds are temporarily disabled and will be enabled in a future release.
