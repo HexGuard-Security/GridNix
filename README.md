@@ -11,10 +11,8 @@ A reproducible NixOS-based operating system for industrial control systems (ICS/
 
 <div align="left">
   <img src="https://nixos.org/logo/nixos-logo-only-hires.png" alt="NixOS Logo" height="100"/>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/PROFINET_rgb_2020.png" alt="PROFINET" height="100"/>
   <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/PROFIBUS_rgb_2010.png" alt="PROFIBUS" height="100"/>
   <img src="https://procentec.com/media/3070/industrial-ethernet-logo_312x130px.png" alt="Industrial Ethernet" height="100"/>
-  <img src="https://procentec.com/media/4063/ethercat-logo-procentec-product-page.png" alt="EtherCAT" height="100"/>
   <img src="https://procentec.com/media/4062/ethernetip-logo-procentec-product-page.png" alt="Ethernet/IP" height="100"/>
   <img src="https://procentec.com/media/3071/modbus-logo_312x130px.png" alt="Modbus" height="100"/>
 </div>
@@ -43,6 +41,8 @@ Trying to solve a major problem with other ICS/SCADA security distributions: the
 <div align="left">
   <img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Wireshark_icon.svg" alt="Wireshark" height="50"/>
   <img src="https://www.uvexplorer.com/wp-content/uploads/2023/07/nmap-logo-256x256-1-150x150.png" alt="Nmap" height="50"/>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/PROFINET_rgb_2020.png" alt="PROFINET" height="50"/>
+  <img src="https://procentec.com/media/4063/ethercat-logo-procentec-product-page.png" alt="EtherCAT" height="50"/>
 </div>
 
 | Tool | Description |
