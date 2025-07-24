@@ -1,7 +1,6 @@
 # GridNix
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![NixOS](https://img.shields.io/badge/NixOS-25.05-blue.svg?logo=nixos&logoColor=white)](https://nixos.org)
 [![Open Source Hardware](https://img.shields.io/badge/Hardware-Open%20Source-orange.svg?logo=open-source-initiative&logoColor=white)](https://www.oshwa.org)
 [![Version](https://img.shields.io/badge/Version-0.1.0--alpha-brightgreen.svg)](https://github.com/HexGuard-Security/GridNix/releases)
 [![Maintained by HexGuard-Security](https://img.shields.io/badge/Maintained%20by-HexGuard--Security-red.svg)](https://github.com/HexGuard-Security)
@@ -109,8 +108,6 @@ Trying to solve a major problem with other ICS/SCADA security distributions: the
 
 ### Firmware Analysis
 <div align="left">
-  <img src="https://www.ghidra-sre.org/images/GHIDRA_1.png" alt="Ghidra" height="50"/>
-  <img src="https://rada.re/n/r2logo.png" alt="Radare2" height="50"/>
 </div>
 
 | Tool | Description |
